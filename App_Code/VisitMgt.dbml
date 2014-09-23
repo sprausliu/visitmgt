@@ -1,0 +1,93 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="vistor_mgt" Class="VisitMgtDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="WebSettings" ConnectionString="Data Source=stjnapp03;Initial Catalog=vistor_mgt;Persist Security Info=True;User ID=sa" SettingsObjectName="System.Configuration.ConfigurationManager.ConnectionStrings" SettingsPropertyName="vistor_mgtConnectionString" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.visit_main" Member="visit_main">
+    <Type Name="visit_main">
+      <Column Name="v_id" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="v_gate" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="v_card" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="v_life" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="v_visitor" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="v_hasID" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="v_type" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="v_reason" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="v_nums" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="v_entry" Type="System.String" DbType="NVarChar(200)" CanBeNull="true" />
+      <Column Name="v_respondent" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="v_status" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="v_intime" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="v_outtime" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Association Name="gate_visit_main" Member="gate" ThisKey="v_gate" OtherKey="gate_id" Type="gate" IsForeignKey="true" />
+      <Association Name="respondent_visit_main" Member="respondent" ThisKey="v_respondent" OtherKey="respondent_id" Type="respondent" IsForeignKey="true" />
+      <Association Name="visit_card_visit_main" Member="visit_card" ThisKey="v_card" OtherKey="c_id" Type="visit_card" IsForeignKey="true" />
+      <Association Name="visitor_visit_main" Member="visitor" ThisKey="v_visitor" OtherKey="visitor_id" Type="visitor" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.cert_type" Member="cert_type">
+    <Type Name="cert_type">
+      <Column Name="cert_type_code" Type="System.String" DbType="VarChar(50) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="cert_type_desc" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Association Name="cert_type_visitor_cert" Member="visitor_cert" ThisKey="cert_type_code" OtherKey="cert_type" Type="visitor_cert" />
+    </Type>
+  </Table>
+  <Table Name="dbo.visitor_cert" Member="visitor_cert">
+    <Type Name="visitor_cert">
+      <Column Name="cert_id" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="cert_host" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="cert_name" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="cert_type" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="cert_code" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="cert_exipred" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Association Name="cert_type_visitor_cert" Member="cert_type1" ThisKey="cert_type" OtherKey="cert_type_code" Type="cert_type" IsForeignKey="true" />
+      <Association Name="visitor_visitor_cert" Member="visitor" ThisKey="cert_host" OtherKey="visitor_id" Type="visitor" IsForeignKey="true" DeleteRule="CASCADE" />
+    </Type>
+  </Table>
+  <Table Name="dbo.gate" Member="gate">
+    <Type Name="gate">
+      <Column Name="gate_id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="gate_name" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="gate_plant" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Association Name="gate_visit_main" Member="visit_main" ThisKey="gate_id" OtherKey="v_gate" Type="visit_main" />
+      <Association Name="plant_gate" Member="plant" ThisKey="gate_plant" OtherKey="plant_code" Type="plant" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.plant" Member="plant">
+    <Type Name="plant">
+      <Column Name="plant_code" Type="System.String" DbType="VarChar(50) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="plant_name" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="plant_name_en" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+      <Column Name="plant_address" Type="System.String" DbType="NVarChar(200)" CanBeNull="true" />
+      <Association Name="plant_gate" Member="gate" ThisKey="plant_code" OtherKey="gate_plant" Type="gate" />
+      <Association Name="plant_respondent" Member="respondent" ThisKey="plant_code" OtherKey="respondent_plant" Type="respondent" />
+    </Type>
+  </Table>
+  <Table Name="dbo.respondent" Member="respondent">
+    <Type Name="respondent">
+      <Column Name="respondent_id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="respondent_name" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="respondent_plant" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="respondent_dept" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="respondent_tel" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="respondent_tel2" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Association Name="respondent_visit_main" Member="visit_main" ThisKey="respondent_id" OtherKey="v_respondent" Type="visit_main" />
+      <Association Name="plant_respondent" Member="plant" ThisKey="respondent_plant" OtherKey="plant_code" Type="plant" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.visit_card" Member="visit_card">
+    <Type Name="visit_card">
+      <Column Name="c_id" Type="System.String" DbType="NVarChar(50) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="c_desc" Type="System.String" DbType="NVarChar(255) NOT NULL" CanBeNull="false" />
+      <Column Name="c_type" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="visit_card_visit_main" Member="visit_main" ThisKey="c_id" OtherKey="v_card" Type="visit_main" />
+    </Type>
+  </Table>
+  <Table Name="dbo.visitor" Member="visitor">
+    <Type Name="visitor">
+      <Column Name="visitor_id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="visitor_name" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="visitor_sex" Type="System.String" DbType="VarChar(2)" CanBeNull="true" />
+      <Column Name="visitor_lastcheck" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Association Name="visitor_visit_main" Member="visit_main" ThisKey="visitor_id" OtherKey="v_visitor" Type="visit_main" />
+      <Association Name="visitor_visitor_cert" Member="visitor_cert" ThisKey="visitor_id" OtherKey="cert_host" Type="visitor_cert" />
+    </Type>
+  </Table>
+</Database>
