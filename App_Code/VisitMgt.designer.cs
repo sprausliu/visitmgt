@@ -29,9 +29,6 @@ public partial class VisitMgtDataContext : System.Data.Linq.DataContext
 	
   #region 可扩展性方法定义
   partial void OnCreated();
-  partial void Insertvisit_main(visit_main instance);
-  partial void Updatevisit_main(visit_main instance);
-  partial void Deletevisit_main(visit_main instance);
   partial void Insertcert_type(cert_type instance);
   partial void Updatecert_type(cert_type instance);
   partial void Deletecert_type(cert_type instance);
@@ -50,6 +47,9 @@ public partial class VisitMgtDataContext : System.Data.Linq.DataContext
   partial void Insertvisit_card(visit_card instance);
   partial void Updatevisit_card(visit_card instance);
   partial void Deletevisit_card(visit_card instance);
+  partial void Insertvisit_main(visit_main instance);
+  partial void Updatevisit_main(visit_main instance);
+  partial void Deletevisit_main(visit_main instance);
   partial void Insertvisitor(visitor instance);
   partial void Updatevisitor(visitor instance);
   partial void Deletevisitor(visitor instance);
@@ -83,14 +83,6 @@ public partial class VisitMgtDataContext : System.Data.Linq.DataContext
 			base(connection, mappingSource)
 	{
 		OnCreated();
-	}
-	
-	public System.Data.Linq.Table<visit_main> visit_main
-	{
-		get
-		{
-			return this.GetTable<visit_main>();
-		}
 	}
 	
 	public System.Data.Linq.Table<cert_type> cert_type
@@ -141,6 +133,14 @@ public partial class VisitMgtDataContext : System.Data.Linq.DataContext
 		}
 	}
 	
+	public System.Data.Linq.Table<visit_main> visit_main
+	{
+		get
+		{
+			return this.GetTable<visit_main>();
+		}
+	}
+	
 	public System.Data.Linq.Table<visitor> visitor
 	{
 		get
@@ -148,542 +148,12 @@ public partial class VisitMgtDataContext : System.Data.Linq.DataContext
 			return this.GetTable<visitor>();
 		}
 	}
-}
-
-[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.visit_main")]
-public partial class visit_main : INotifyPropertyChanging, INotifyPropertyChanged
-{
 	
-	private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-	
-	private System.Guid _v_id;
-	
-	private int _v_gate;
-	
-	private string _v_card;
-	
-	private int _v_life;
-	
-	private int _v_visitor;
-	
-	private bool _v_hasID;
-	
-	private string _v_type;
-	
-	private string _v_reason;
-	
-	private System.Nullable<int> _v_nums;
-	
-	private string _v_entry;
-	
-	private System.Nullable<int> _v_respondent;
-	
-	private string _v_status;
-	
-	private System.Nullable<System.DateTime> _v_intime;
-	
-	private System.Nullable<System.DateTime> _v_outtime;
-	
-	private EntityRef<gate> _gate;
-	
-	private EntityRef<respondent> _respondent;
-	
-	private EntityRef<visit_card> _visit_card;
-	
-	private EntityRef<visitor> _visitor;
-	
-    #region 可扩展性方法定义
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void Onv_idChanging(System.Guid value);
-    partial void Onv_idChanged();
-    partial void Onv_gateChanging(int value);
-    partial void Onv_gateChanged();
-    partial void Onv_cardChanging(string value);
-    partial void Onv_cardChanged();
-    partial void Onv_lifeChanging(int value);
-    partial void Onv_lifeChanged();
-    partial void Onv_visitorChanging(int value);
-    partial void Onv_visitorChanged();
-    partial void Onv_hasIDChanging(bool value);
-    partial void Onv_hasIDChanged();
-    partial void Onv_typeChanging(string value);
-    partial void Onv_typeChanged();
-    partial void Onv_reasonChanging(string value);
-    partial void Onv_reasonChanged();
-    partial void Onv_numsChanging(System.Nullable<int> value);
-    partial void Onv_numsChanged();
-    partial void Onv_entryChanging(string value);
-    partial void Onv_entryChanged();
-    partial void Onv_respondentChanging(System.Nullable<int> value);
-    partial void Onv_respondentChanged();
-    partial void Onv_statusChanging(string value);
-    partial void Onv_statusChanged();
-    partial void Onv_intimeChanging(System.Nullable<System.DateTime> value);
-    partial void Onv_intimeChanged();
-    partial void Onv_outtimeChanging(System.Nullable<System.DateTime> value);
-    partial void Onv_outtimeChanged();
-    #endregion
-	
-	public visit_main()
-	{
-		this._gate = default(EntityRef<gate>);
-		this._respondent = default(EntityRef<respondent>);
-		this._visit_card = default(EntityRef<visit_card>);
-		this._visitor = default(EntityRef<visitor>);
-		OnCreated();
-	}
-	
-	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_v_id", DbType="UniqueIdentifier NOT NULL", IsPrimaryKey=true)]
-	public System.Guid v_id
+	public System.Data.Linq.Table<fire_train> fire_train
 	{
 		get
 		{
-			return this._v_id;
-		}
-		set
-		{
-			if ((this._v_id != value))
-			{
-				this.Onv_idChanging(value);
-				this.SendPropertyChanging();
-				this._v_id = value;
-				this.SendPropertyChanged("v_id");
-				this.Onv_idChanged();
-			}
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_v_gate", DbType="Int NOT NULL")]
-	public int v_gate
-	{
-		get
-		{
-			return this._v_gate;
-		}
-		set
-		{
-			if ((this._v_gate != value))
-			{
-				if (this._gate.HasLoadedOrAssignedValue)
-				{
-					throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-				}
-				this.Onv_gateChanging(value);
-				this.SendPropertyChanging();
-				this._v_gate = value;
-				this.SendPropertyChanged("v_gate");
-				this.Onv_gateChanged();
-			}
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_v_card", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
-	public string v_card
-	{
-		get
-		{
-			return this._v_card;
-		}
-		set
-		{
-			if ((this._v_card != value))
-			{
-				if (this._visit_card.HasLoadedOrAssignedValue)
-				{
-					throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-				}
-				this.Onv_cardChanging(value);
-				this.SendPropertyChanging();
-				this._v_card = value;
-				this.SendPropertyChanged("v_card");
-				this.Onv_cardChanged();
-			}
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_v_life", DbType="Int NOT NULL")]
-	public int v_life
-	{
-		get
-		{
-			return this._v_life;
-		}
-		set
-		{
-			if ((this._v_life != value))
-			{
-				this.Onv_lifeChanging(value);
-				this.SendPropertyChanging();
-				this._v_life = value;
-				this.SendPropertyChanged("v_life");
-				this.Onv_lifeChanged();
-			}
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_v_visitor", DbType="Int NOT NULL")]
-	public int v_visitor
-	{
-		get
-		{
-			return this._v_visitor;
-		}
-		set
-		{
-			if ((this._v_visitor != value))
-			{
-				if (this._visitor.HasLoadedOrAssignedValue)
-				{
-					throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-				}
-				this.Onv_visitorChanging(value);
-				this.SendPropertyChanging();
-				this._v_visitor = value;
-				this.SendPropertyChanged("v_visitor");
-				this.Onv_visitorChanged();
-			}
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_v_hasID", DbType="Bit NOT NULL")]
-	public bool v_hasID
-	{
-		get
-		{
-			return this._v_hasID;
-		}
-		set
-		{
-			if ((this._v_hasID != value))
-			{
-				this.Onv_hasIDChanging(value);
-				this.SendPropertyChanging();
-				this._v_hasID = value;
-				this.SendPropertyChanged("v_hasID");
-				this.Onv_hasIDChanged();
-			}
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_v_type", DbType="NVarChar(50)")]
-	public string v_type
-	{
-		get
-		{
-			return this._v_type;
-		}
-		set
-		{
-			if ((this._v_type != value))
-			{
-				this.Onv_typeChanging(value);
-				this.SendPropertyChanging();
-				this._v_type = value;
-				this.SendPropertyChanged("v_type");
-				this.Onv_typeChanged();
-			}
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_v_reason", DbType="NVarChar(100)")]
-	public string v_reason
-	{
-		get
-		{
-			return this._v_reason;
-		}
-		set
-		{
-			if ((this._v_reason != value))
-			{
-				this.Onv_reasonChanging(value);
-				this.SendPropertyChanging();
-				this._v_reason = value;
-				this.SendPropertyChanged("v_reason");
-				this.Onv_reasonChanged();
-			}
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_v_nums", DbType="Int")]
-	public System.Nullable<int> v_nums
-	{
-		get
-		{
-			return this._v_nums;
-		}
-		set
-		{
-			if ((this._v_nums != value))
-			{
-				this.Onv_numsChanging(value);
-				this.SendPropertyChanging();
-				this._v_nums = value;
-				this.SendPropertyChanged("v_nums");
-				this.Onv_numsChanged();
-			}
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_v_entry", DbType="NVarChar(200)")]
-	public string v_entry
-	{
-		get
-		{
-			return this._v_entry;
-		}
-		set
-		{
-			if ((this._v_entry != value))
-			{
-				this.Onv_entryChanging(value);
-				this.SendPropertyChanging();
-				this._v_entry = value;
-				this.SendPropertyChanged("v_entry");
-				this.Onv_entryChanged();
-			}
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_v_respondent", DbType="Int")]
-	public System.Nullable<int> v_respondent
-	{
-		get
-		{
-			return this._v_respondent;
-		}
-		set
-		{
-			if ((this._v_respondent != value))
-			{
-				if (this._respondent.HasLoadedOrAssignedValue)
-				{
-					throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-				}
-				this.Onv_respondentChanging(value);
-				this.SendPropertyChanging();
-				this._v_respondent = value;
-				this.SendPropertyChanged("v_respondent");
-				this.Onv_respondentChanged();
-			}
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_v_status", DbType="VarChar(50)")]
-	public string v_status
-	{
-		get
-		{
-			return this._v_status;
-		}
-		set
-		{
-			if ((this._v_status != value))
-			{
-				this.Onv_statusChanging(value);
-				this.SendPropertyChanging();
-				this._v_status = value;
-				this.SendPropertyChanged("v_status");
-				this.Onv_statusChanged();
-			}
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_v_intime", DbType="DateTime")]
-	public System.Nullable<System.DateTime> v_intime
-	{
-		get
-		{
-			return this._v_intime;
-		}
-		set
-		{
-			if ((this._v_intime != value))
-			{
-				this.Onv_intimeChanging(value);
-				this.SendPropertyChanging();
-				this._v_intime = value;
-				this.SendPropertyChanged("v_intime");
-				this.Onv_intimeChanged();
-			}
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_v_outtime", DbType="DateTime")]
-	public System.Nullable<System.DateTime> v_outtime
-	{
-		get
-		{
-			return this._v_outtime;
-		}
-		set
-		{
-			if ((this._v_outtime != value))
-			{
-				this.Onv_outtimeChanging(value);
-				this.SendPropertyChanging();
-				this._v_outtime = value;
-				this.SendPropertyChanged("v_outtime");
-				this.Onv_outtimeChanged();
-			}
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.AssociationAttribute(Name="gate_visit_main", Storage="_gate", ThisKey="v_gate", OtherKey="gate_id", IsForeignKey=true)]
-	public gate gate
-	{
-		get
-		{
-			return this._gate.Entity;
-		}
-		set
-		{
-			gate previousValue = this._gate.Entity;
-			if (((previousValue != value) 
-						|| (this._gate.HasLoadedOrAssignedValue == false)))
-			{
-				this.SendPropertyChanging();
-				if ((previousValue != null))
-				{
-					this._gate.Entity = null;
-					previousValue.visit_main.Remove(this);
-				}
-				this._gate.Entity = value;
-				if ((value != null))
-				{
-					value.visit_main.Add(this);
-					this._v_gate = value.gate_id;
-				}
-				else
-				{
-					this._v_gate = default(int);
-				}
-				this.SendPropertyChanged("gate");
-			}
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.AssociationAttribute(Name="respondent_visit_main", Storage="_respondent", ThisKey="v_respondent", OtherKey="respondent_id", IsForeignKey=true)]
-	public respondent respondent
-	{
-		get
-		{
-			return this._respondent.Entity;
-		}
-		set
-		{
-			respondent previousValue = this._respondent.Entity;
-			if (((previousValue != value) 
-						|| (this._respondent.HasLoadedOrAssignedValue == false)))
-			{
-				this.SendPropertyChanging();
-				if ((previousValue != null))
-				{
-					this._respondent.Entity = null;
-					previousValue.visit_main.Remove(this);
-				}
-				this._respondent.Entity = value;
-				if ((value != null))
-				{
-					value.visit_main.Add(this);
-					this._v_respondent = value.respondent_id;
-				}
-				else
-				{
-					this._v_respondent = default(Nullable<int>);
-				}
-				this.SendPropertyChanged("respondent");
-			}
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.AssociationAttribute(Name="visit_card_visit_main", Storage="_visit_card", ThisKey="v_card", OtherKey="c_id", IsForeignKey=true)]
-	public visit_card visit_card
-	{
-		get
-		{
-			return this._visit_card.Entity;
-		}
-		set
-		{
-			visit_card previousValue = this._visit_card.Entity;
-			if (((previousValue != value) 
-						|| (this._visit_card.HasLoadedOrAssignedValue == false)))
-			{
-				this.SendPropertyChanging();
-				if ((previousValue != null))
-				{
-					this._visit_card.Entity = null;
-					previousValue.visit_main.Remove(this);
-				}
-				this._visit_card.Entity = value;
-				if ((value != null))
-				{
-					value.visit_main.Add(this);
-					this._v_card = value.c_id;
-				}
-				else
-				{
-					this._v_card = default(string);
-				}
-				this.SendPropertyChanged("visit_card");
-			}
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.AssociationAttribute(Name="visitor_visit_main", Storage="_visitor", ThisKey="v_visitor", OtherKey="visitor_id", IsForeignKey=true)]
-	public visitor visitor
-	{
-		get
-		{
-			return this._visitor.Entity;
-		}
-		set
-		{
-			visitor previousValue = this._visitor.Entity;
-			if (((previousValue != value) 
-						|| (this._visitor.HasLoadedOrAssignedValue == false)))
-			{
-				this.SendPropertyChanging();
-				if ((previousValue != null))
-				{
-					this._visitor.Entity = null;
-					previousValue.visit_main.Remove(this);
-				}
-				this._visitor.Entity = value;
-				if ((value != null))
-				{
-					value.visit_main.Add(this);
-					this._v_visitor = value.visitor_id;
-				}
-				else
-				{
-					this._v_visitor = default(int);
-				}
-				this.SendPropertyChanged("visitor");
-			}
-		}
-	}
-	
-	public event PropertyChangingEventHandler PropertyChanging;
-	
-	public event PropertyChangedEventHandler PropertyChanged;
-	
-	protected virtual void SendPropertyChanging()
-	{
-		if ((this.PropertyChanging != null))
-		{
-			this.PropertyChanging(this, emptyChangingEventArgs);
-		}
-	}
-	
-	protected virtual void SendPropertyChanged(String propertyName)
-	{
-		if ((this.PropertyChanged != null))
-		{
-			this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			return this.GetTable<fire_train>();
 		}
 	}
 }
@@ -1696,6 +1166,8 @@ public partial class visit_card : INotifyPropertyChanging, INotifyPropertyChange
 	
 	private string _c_desc;
 	
+	private System.Nullable<bool> _c_avaliable;
+	
 	private int _c_type;
 	
 	private EntitySet<visit_main> _visit_main;
@@ -1708,6 +1180,8 @@ public partial class visit_card : INotifyPropertyChanging, INotifyPropertyChange
     partial void Onc_idChanged();
     partial void Onc_descChanging(string value);
     partial void Onc_descChanged();
+    partial void Onc_avaliableChanging(System.Nullable<bool> value);
+    partial void Onc_avaliableChanged();
     partial void Onc_typeChanging(int value);
     partial void Onc_typeChanged();
     #endregion
@@ -1754,6 +1228,26 @@ public partial class visit_card : INotifyPropertyChanging, INotifyPropertyChange
 				this._c_desc = value;
 				this.SendPropertyChanged("c_desc");
 				this.Onc_descChanged();
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_c_avaliable", DbType="Bit")]
+	public System.Nullable<bool> c_avaliable
+	{
+		get
+		{
+			return this._c_avaliable;
+		}
+		set
+		{
+			if ((this._c_avaliable != value))
+			{
+				this.Onc_avaliableChanging(value);
+				this.SendPropertyChanging();
+				this._c_avaliable = value;
+				this.SendPropertyChanged("c_avaliable");
+				this.Onc_avaliableChanged();
 			}
 		}
 	}
@@ -1824,6 +1318,544 @@ public partial class visit_card : INotifyPropertyChanging, INotifyPropertyChange
 	}
 }
 
+[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.visit_main")]
+public partial class visit_main : INotifyPropertyChanging, INotifyPropertyChanged
+{
+	
+	private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+	
+	private System.Guid _v_id;
+	
+	private int _v_gate;
+	
+	private string _v_card;
+	
+	private int _v_life;
+	
+	private int _v_visitor;
+	
+	private bool _v_hasID;
+	
+	private string _v_type;
+	
+	private string _v_reason;
+	
+	private System.Nullable<int> _v_nums;
+	
+	private string _v_entry;
+	
+	private System.Nullable<int> _v_respondent;
+	
+	private string _v_status;
+	
+	private System.Nullable<System.DateTime> _v_intime;
+	
+	private System.Nullable<System.DateTime> _v_outtime;
+	
+	private EntityRef<gate> _gate;
+	
+	private EntityRef<respondent> _respondent;
+	
+	private EntityRef<visit_card> _visit_card;
+	
+	private EntityRef<visitor> _visitor;
+	
+    #region 可扩展性方法定义
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void Onv_idChanging(System.Guid value);
+    partial void Onv_idChanged();
+    partial void Onv_gateChanging(int value);
+    partial void Onv_gateChanged();
+    partial void Onv_cardChanging(string value);
+    partial void Onv_cardChanged();
+    partial void Onv_lifeChanging(int value);
+    partial void Onv_lifeChanged();
+    partial void Onv_visitorChanging(int value);
+    partial void Onv_visitorChanged();
+    partial void Onv_hasIDChanging(bool value);
+    partial void Onv_hasIDChanged();
+    partial void Onv_typeChanging(string value);
+    partial void Onv_typeChanged();
+    partial void Onv_reasonChanging(string value);
+    partial void Onv_reasonChanged();
+    partial void Onv_numsChanging(System.Nullable<int> value);
+    partial void Onv_numsChanged();
+    partial void Onv_entryChanging(string value);
+    partial void Onv_entryChanged();
+    partial void Onv_respondentChanging(System.Nullable<int> value);
+    partial void Onv_respondentChanged();
+    partial void Onv_statusChanging(string value);
+    partial void Onv_statusChanged();
+    partial void Onv_intimeChanging(System.Nullable<System.DateTime> value);
+    partial void Onv_intimeChanged();
+    partial void Onv_outtimeChanging(System.Nullable<System.DateTime> value);
+    partial void Onv_outtimeChanged();
+    #endregion
+	
+	public visit_main()
+	{
+		this._gate = default(EntityRef<gate>);
+		this._respondent = default(EntityRef<respondent>);
+		this._visit_card = default(EntityRef<visit_card>);
+		this._visitor = default(EntityRef<visitor>);
+		OnCreated();
+	}
+	
+	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_v_id", DbType="UniqueIdentifier NOT NULL", IsPrimaryKey=true)]
+	public System.Guid v_id
+	{
+		get
+		{
+			return this._v_id;
+		}
+		set
+		{
+			if ((this._v_id != value))
+			{
+				this.Onv_idChanging(value);
+				this.SendPropertyChanging();
+				this._v_id = value;
+				this.SendPropertyChanged("v_id");
+				this.Onv_idChanged();
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_v_gate", DbType="Int NOT NULL")]
+	public int v_gate
+	{
+		get
+		{
+			return this._v_gate;
+		}
+		set
+		{
+			if ((this._v_gate != value))
+			{
+				if (this._gate.HasLoadedOrAssignedValue)
+				{
+					throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+				}
+				this.Onv_gateChanging(value);
+				this.SendPropertyChanging();
+				this._v_gate = value;
+				this.SendPropertyChanged("v_gate");
+				this.Onv_gateChanged();
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_v_card", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
+	public string v_card
+	{
+		get
+		{
+			return this._v_card;
+		}
+		set
+		{
+			if ((this._v_card != value))
+			{
+				if (this._visit_card.HasLoadedOrAssignedValue)
+				{
+					throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+				}
+				this.Onv_cardChanging(value);
+				this.SendPropertyChanging();
+				this._v_card = value;
+				this.SendPropertyChanged("v_card");
+				this.Onv_cardChanged();
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_v_life", DbType="Int NOT NULL")]
+	public int v_life
+	{
+		get
+		{
+			return this._v_life;
+		}
+		set
+		{
+			if ((this._v_life != value))
+			{
+				this.Onv_lifeChanging(value);
+				this.SendPropertyChanging();
+				this._v_life = value;
+				this.SendPropertyChanged("v_life");
+				this.Onv_lifeChanged();
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_v_visitor", DbType="Int NOT NULL")]
+	public int v_visitor
+	{
+		get
+		{
+			return this._v_visitor;
+		}
+		set
+		{
+			if ((this._v_visitor != value))
+			{
+				if (this._visitor.HasLoadedOrAssignedValue)
+				{
+					throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+				}
+				this.Onv_visitorChanging(value);
+				this.SendPropertyChanging();
+				this._v_visitor = value;
+				this.SendPropertyChanged("v_visitor");
+				this.Onv_visitorChanged();
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_v_hasID", DbType="Bit NOT NULL")]
+	public bool v_hasID
+	{
+		get
+		{
+			return this._v_hasID;
+		}
+		set
+		{
+			if ((this._v_hasID != value))
+			{
+				this.Onv_hasIDChanging(value);
+				this.SendPropertyChanging();
+				this._v_hasID = value;
+				this.SendPropertyChanged("v_hasID");
+				this.Onv_hasIDChanged();
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_v_type", DbType="NVarChar(50)")]
+	public string v_type
+	{
+		get
+		{
+			return this._v_type;
+		}
+		set
+		{
+			if ((this._v_type != value))
+			{
+				this.Onv_typeChanging(value);
+				this.SendPropertyChanging();
+				this._v_type = value;
+				this.SendPropertyChanged("v_type");
+				this.Onv_typeChanged();
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_v_reason", DbType="NVarChar(100)")]
+	public string v_reason
+	{
+		get
+		{
+			return this._v_reason;
+		}
+		set
+		{
+			if ((this._v_reason != value))
+			{
+				this.Onv_reasonChanging(value);
+				this.SendPropertyChanging();
+				this._v_reason = value;
+				this.SendPropertyChanged("v_reason");
+				this.Onv_reasonChanged();
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_v_nums", DbType="Int")]
+	public System.Nullable<int> v_nums
+	{
+		get
+		{
+			return this._v_nums;
+		}
+		set
+		{
+			if ((this._v_nums != value))
+			{
+				this.Onv_numsChanging(value);
+				this.SendPropertyChanging();
+				this._v_nums = value;
+				this.SendPropertyChanged("v_nums");
+				this.Onv_numsChanged();
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_v_entry", DbType="NVarChar(200)")]
+	public string v_entry
+	{
+		get
+		{
+			return this._v_entry;
+		}
+		set
+		{
+			if ((this._v_entry != value))
+			{
+				this.Onv_entryChanging(value);
+				this.SendPropertyChanging();
+				this._v_entry = value;
+				this.SendPropertyChanged("v_entry");
+				this.Onv_entryChanged();
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_v_respondent", DbType="Int")]
+	public System.Nullable<int> v_respondent
+	{
+		get
+		{
+			return this._v_respondent;
+		}
+		set
+		{
+			if ((this._v_respondent != value))
+			{
+				if (this._respondent.HasLoadedOrAssignedValue)
+				{
+					throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+				}
+				this.Onv_respondentChanging(value);
+				this.SendPropertyChanging();
+				this._v_respondent = value;
+				this.SendPropertyChanged("v_respondent");
+				this.Onv_respondentChanged();
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_v_status", DbType="VarChar(50)")]
+	public string v_status
+	{
+		get
+		{
+			return this._v_status;
+		}
+		set
+		{
+			if ((this._v_status != value))
+			{
+				this.Onv_statusChanging(value);
+				this.SendPropertyChanging();
+				this._v_status = value;
+				this.SendPropertyChanged("v_status");
+				this.Onv_statusChanged();
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_v_intime", DbType="DateTime")]
+	public System.Nullable<System.DateTime> v_intime
+	{
+		get
+		{
+			return this._v_intime;
+		}
+		set
+		{
+			if ((this._v_intime != value))
+			{
+				this.Onv_intimeChanging(value);
+				this.SendPropertyChanging();
+				this._v_intime = value;
+				this.SendPropertyChanged("v_intime");
+				this.Onv_intimeChanged();
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_v_outtime", DbType="DateTime")]
+	public System.Nullable<System.DateTime> v_outtime
+	{
+		get
+		{
+			return this._v_outtime;
+		}
+		set
+		{
+			if ((this._v_outtime != value))
+			{
+				this.Onv_outtimeChanging(value);
+				this.SendPropertyChanging();
+				this._v_outtime = value;
+				this.SendPropertyChanged("v_outtime");
+				this.Onv_outtimeChanged();
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.AssociationAttribute(Name="gate_visit_main", Storage="_gate", ThisKey="v_gate", OtherKey="gate_id", IsForeignKey=true)]
+	public gate gate
+	{
+		get
+		{
+			return this._gate.Entity;
+		}
+		set
+		{
+			gate previousValue = this._gate.Entity;
+			if (((previousValue != value) 
+						|| (this._gate.HasLoadedOrAssignedValue == false)))
+			{
+				this.SendPropertyChanging();
+				if ((previousValue != null))
+				{
+					this._gate.Entity = null;
+					previousValue.visit_main.Remove(this);
+				}
+				this._gate.Entity = value;
+				if ((value != null))
+				{
+					value.visit_main.Add(this);
+					this._v_gate = value.gate_id;
+				}
+				else
+				{
+					this._v_gate = default(int);
+				}
+				this.SendPropertyChanged("gate");
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.AssociationAttribute(Name="respondent_visit_main", Storage="_respondent", ThisKey="v_respondent", OtherKey="respondent_id", IsForeignKey=true)]
+	public respondent respondent
+	{
+		get
+		{
+			return this._respondent.Entity;
+		}
+		set
+		{
+			respondent previousValue = this._respondent.Entity;
+			if (((previousValue != value) 
+						|| (this._respondent.HasLoadedOrAssignedValue == false)))
+			{
+				this.SendPropertyChanging();
+				if ((previousValue != null))
+				{
+					this._respondent.Entity = null;
+					previousValue.visit_main.Remove(this);
+				}
+				this._respondent.Entity = value;
+				if ((value != null))
+				{
+					value.visit_main.Add(this);
+					this._v_respondent = value.respondent_id;
+				}
+				else
+				{
+					this._v_respondent = default(Nullable<int>);
+				}
+				this.SendPropertyChanged("respondent");
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.AssociationAttribute(Name="visit_card_visit_main", Storage="_visit_card", ThisKey="v_card", OtherKey="c_id", IsForeignKey=true)]
+	public visit_card visit_card
+	{
+		get
+		{
+			return this._visit_card.Entity;
+		}
+		set
+		{
+			visit_card previousValue = this._visit_card.Entity;
+			if (((previousValue != value) 
+						|| (this._visit_card.HasLoadedOrAssignedValue == false)))
+			{
+				this.SendPropertyChanging();
+				if ((previousValue != null))
+				{
+					this._visit_card.Entity = null;
+					previousValue.visit_main.Remove(this);
+				}
+				this._visit_card.Entity = value;
+				if ((value != null))
+				{
+					value.visit_main.Add(this);
+					this._v_card = value.c_id;
+				}
+				else
+				{
+					this._v_card = default(string);
+				}
+				this.SendPropertyChanged("visit_card");
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.AssociationAttribute(Name="visitor_visit_main", Storage="_visitor", ThisKey="v_visitor", OtherKey="visitor_id", IsForeignKey=true)]
+	public visitor visitor
+	{
+		get
+		{
+			return this._visitor.Entity;
+		}
+		set
+		{
+			visitor previousValue = this._visitor.Entity;
+			if (((previousValue != value) 
+						|| (this._visitor.HasLoadedOrAssignedValue == false)))
+			{
+				this.SendPropertyChanging();
+				if ((previousValue != null))
+				{
+					this._visitor.Entity = null;
+					previousValue.visit_main.Remove(this);
+				}
+				this._visitor.Entity = value;
+				if ((value != null))
+				{
+					value.visit_main.Add(this);
+					this._v_visitor = value.visitor_id;
+				}
+				else
+				{
+					this._v_visitor = default(int);
+				}
+				this.SendPropertyChanged("visitor");
+			}
+		}
+	}
+	
+	public event PropertyChangingEventHandler PropertyChanging;
+	
+	public event PropertyChangedEventHandler PropertyChanged;
+	
+	protected virtual void SendPropertyChanging()
+	{
+		if ((this.PropertyChanging != null))
+		{
+			this.PropertyChanging(this, emptyChangingEventArgs);
+		}
+	}
+	
+	protected virtual void SendPropertyChanged(String propertyName)
+	{
+		if ((this.PropertyChanged != null))
+		{
+			this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+		}
+	}
+}
+
 [global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.visitor")]
 public partial class visitor : INotifyPropertyChanging, INotifyPropertyChanged
 {
@@ -1838,9 +1870,9 @@ public partial class visitor : INotifyPropertyChanging, INotifyPropertyChanged
 	
 	private System.Nullable<System.DateTime> _visitor_lastcheck;
 	
-	private EntitySet<visit_main> _visit_main;
-	
 	private EntitySet<visitor_cert> _visitor_cert;
+	
+	private EntitySet<visit_main> _visit_main;
 	
     #region 可扩展性方法定义
     partial void OnLoaded();
@@ -1858,8 +1890,8 @@ public partial class visitor : INotifyPropertyChanging, INotifyPropertyChanged
 	
 	public visitor()
 	{
-		this._visit_main = new EntitySet<visit_main>(new Action<visit_main>(this.attach_visit_main), new Action<visit_main>(this.detach_visit_main));
 		this._visitor_cert = new EntitySet<visitor_cert>(new Action<visitor_cert>(this.attach_visitor_cert), new Action<visitor_cert>(this.detach_visitor_cert));
+		this._visit_main = new EntitySet<visit_main>(new Action<visit_main>(this.attach_visit_main), new Action<visit_main>(this.detach_visit_main));
 		OnCreated();
 	}
 	
@@ -1943,19 +1975,6 @@ public partial class visitor : INotifyPropertyChanging, INotifyPropertyChanged
 		}
 	}
 	
-	[global::System.Data.Linq.Mapping.AssociationAttribute(Name="visitor_visit_main", Storage="_visit_main", ThisKey="visitor_id", OtherKey="v_visitor")]
-	public EntitySet<visit_main> visit_main
-	{
-		get
-		{
-			return this._visit_main;
-		}
-		set
-		{
-			this._visit_main.Assign(value);
-		}
-	}
-	
 	[global::System.Data.Linq.Mapping.AssociationAttribute(Name="visitor_visitor_cert", Storage="_visitor_cert", ThisKey="visitor_id", OtherKey="cert_host")]
 	public EntitySet<visitor_cert> visitor_cert
 	{
@@ -1966,6 +1985,19 @@ public partial class visitor : INotifyPropertyChanging, INotifyPropertyChanged
 		set
 		{
 			this._visitor_cert.Assign(value);
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.AssociationAttribute(Name="visitor_visit_main", Storage="_visit_main", ThisKey="visitor_id", OtherKey="v_visitor")]
+	public EntitySet<visit_main> visit_main
+	{
+		get
+		{
+			return this._visit_main;
+		}
+		set
+		{
+			this._visit_main.Assign(value);
 		}
 	}
 	
@@ -1989,6 +2021,18 @@ public partial class visitor : INotifyPropertyChanging, INotifyPropertyChanged
 		}
 	}
 	
+	private void attach_visitor_cert(visitor_cert entity)
+	{
+		this.SendPropertyChanging();
+		entity.visitor = this;
+	}
+	
+	private void detach_visitor_cert(visitor_cert entity)
+	{
+		this.SendPropertyChanging();
+		entity.visitor = null;
+	}
+	
 	private void attach_visit_main(visit_main entity)
 	{
 		this.SendPropertyChanging();
@@ -2000,17 +2044,68 @@ public partial class visitor : INotifyPropertyChanging, INotifyPropertyChanged
 		this.SendPropertyChanging();
 		entity.visitor = null;
 	}
+}
+
+[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.fire_train")]
+public partial class fire_train
+{
 	
-	private void attach_visitor_cert(visitor_cert entity)
+	private System.Guid _train_id;
+	
+	private System.Nullable<int> _visitor;
+	
+	private System.Nullable<System.DateTime> _train_date;
+	
+	public fire_train()
 	{
-		this.SendPropertyChanging();
-		entity.visitor = this;
 	}
 	
-	private void detach_visitor_cert(visitor_cert entity)
+	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_train_id", DbType="UniqueIdentifier NOT NULL")]
+	public System.Guid train_id
 	{
-		this.SendPropertyChanging();
-		entity.visitor = null;
+		get
+		{
+			return this._train_id;
+		}
+		set
+		{
+			if ((this._train_id != value))
+			{
+				this._train_id = value;
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_visitor", DbType="Int")]
+	public System.Nullable<int> visitor
+	{
+		get
+		{
+			return this._visitor;
+		}
+		set
+		{
+			if ((this._visitor != value))
+			{
+				this._visitor = value;
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_train_date", DbType="DateTime")]
+	public System.Nullable<System.DateTime> train_date
+	{
+		get
+		{
+			return this._train_date;
+		}
+		set
+		{
+			if ((this._train_date != value))
+			{
+				this._train_date = value;
+			}
+		}
 	}
 }
 #pragma warning restore 1591

@@ -1,27 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?><Database Name="vistor_mgt" Class="VisitMgtDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
   <Connection Mode="WebSettings" ConnectionString="Data Source=stjnapp03;Initial Catalog=vistor_mgt;Persist Security Info=True;User ID=sa" SettingsObjectName="System.Configuration.ConfigurationManager.ConnectionStrings" SettingsPropertyName="vistor_mgtConnectionString" Provider="System.Data.SqlClient" />
-  <Table Name="dbo.visit_main" Member="visit_main">
-    <Type Name="visit_main">
-      <Column Name="v_id" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
-      <Column Name="v_gate" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="v_card" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
-      <Column Name="v_life" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="v_visitor" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="v_hasID" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
-      <Column Name="v_type" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
-      <Column Name="v_reason" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
-      <Column Name="v_nums" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="v_entry" Type="System.String" DbType="NVarChar(200)" CanBeNull="true" />
-      <Column Name="v_respondent" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="v_status" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
-      <Column Name="v_intime" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
-      <Column Name="v_outtime" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
-      <Association Name="gate_visit_main" Member="gate" ThisKey="v_gate" OtherKey="gate_id" Type="gate" IsForeignKey="true" />
-      <Association Name="respondent_visit_main" Member="respondent" ThisKey="v_respondent" OtherKey="respondent_id" Type="respondent" IsForeignKey="true" />
-      <Association Name="visit_card_visit_main" Member="visit_card" ThisKey="v_card" OtherKey="c_id" Type="visit_card" IsForeignKey="true" />
-      <Association Name="visitor_visit_main" Member="visitor" ThisKey="v_visitor" OtherKey="visitor_id" Type="visitor" IsForeignKey="true" />
-    </Type>
-  </Table>
   <Table Name="dbo.cert_type" Member="cert_type">
     <Type Name="cert_type">
       <Column Name="cert_type_code" Type="System.String" DbType="VarChar(50) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
@@ -76,8 +54,31 @@
     <Type Name="visit_card">
       <Column Name="c_id" Type="System.String" DbType="NVarChar(50) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
       <Column Name="c_desc" Type="System.String" DbType="NVarChar(255) NOT NULL" CanBeNull="false" />
+      <Column Name="c_avaliable" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
       <Column Name="c_type" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Association Name="visit_card_visit_main" Member="visit_main" ThisKey="c_id" OtherKey="v_card" Type="visit_main" />
+    </Type>
+  </Table>
+  <Table Name="dbo.visit_main" Member="visit_main">
+    <Type Name="visit_main">
+      <Column Name="v_id" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="v_gate" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="v_card" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="v_life" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="v_visitor" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="v_hasID" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="v_type" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="v_reason" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="v_nums" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="v_entry" Type="System.String" DbType="NVarChar(200)" CanBeNull="true" />
+      <Column Name="v_respondent" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="v_status" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="v_intime" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="v_outtime" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Association Name="gate_visit_main" Member="gate" ThisKey="v_gate" OtherKey="gate_id" Type="gate" IsForeignKey="true" />
+      <Association Name="respondent_visit_main" Member="respondent" ThisKey="v_respondent" OtherKey="respondent_id" Type="respondent" IsForeignKey="true" />
+      <Association Name="visit_card_visit_main" Member="visit_card" ThisKey="v_card" OtherKey="c_id" Type="visit_card" IsForeignKey="true" />
+      <Association Name="visitor_visit_main" Member="visitor" ThisKey="v_visitor" OtherKey="visitor_id" Type="visitor" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.visitor" Member="visitor">
@@ -86,8 +87,15 @@
       <Column Name="visitor_name" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
       <Column Name="visitor_sex" Type="System.String" DbType="VarChar(2)" CanBeNull="true" />
       <Column Name="visitor_lastcheck" Type="System.DateTime" DbType="Date" CanBeNull="true" />
-      <Association Name="visitor_visit_main" Member="visit_main" ThisKey="visitor_id" OtherKey="v_visitor" Type="visit_main" />
       <Association Name="visitor_visitor_cert" Member="visitor_cert" ThisKey="visitor_id" OtherKey="cert_host" Type="visitor_cert" />
+      <Association Name="visitor_visit_main" Member="visit_main" ThisKey="visitor_id" OtherKey="v_visitor" Type="visit_main" />
+    </Type>
+  </Table>
+  <Table Name="dbo.fire_train" Member="fire_train">
+    <Type Name="fire_train">
+      <Column Name="train_id" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" CanBeNull="false" />
+      <Column Name="visitor" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="train_date" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
     </Type>
   </Table>
 </Database>
